@@ -1,0 +1,20 @@
+hange Case:
+
+For each file a_file in current directory rename a_file to lower case.
+for a_file in *;do mv -v "$a_file" `echo "$a_file" | tr [:upper:] [:lower:]` ;done;
+For upper case reverse the arguments to [:lower:] [:upper:]
+If you know what file extensions you're dealing with, you can hard-code it:
+
+for f in *.JPG
+do
+  mv -v "$f" "${f%.JPG}.jpg"
+done
+
+For the more-general case:
+
+for f in *
+do 
+  e="${f##*.}"
+  b="${f%.*}"
+  mv -v "$f" "${b}.${e,,}"
+done
