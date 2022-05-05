@@ -1,0 +1,10 @@
+Resize Pictures 50%:
+mkdir resized
+for f in `find . -name "*.jpg"`
+do
+convert $f -resize 50% resized/$f
+done
+
+mkdir ./resized
+find ./ -iname '*.jpg' -exec convert \{} -verbose -set filename:base "%[basename]" -resize 1024x1024\> "./resized/%[filename:base].jpg" \;
+exit
