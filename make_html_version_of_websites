@@ -4,7 +4,7 @@ By Alvin Alexander. Last updated: September 20, 2019
 As a short note today, if you want to make an offline copy/mirror of a website using the GNU/Linux wget command, a command like this will do the trick for you:
 
 wget --mirror --convert-links --html-extension --wait=2 -e robots=off -o log -U Mozilla --user-agent=Mozilla --recursive --no-clobber --page-requisites --no-parent --adjust-extension --span-hosts \
-http://web.creativefloors.co
+[webAddress]
      
 The options are:
     --recursive: download the entire Web site.
