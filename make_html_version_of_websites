@@ -1,0 +1,29 @@
+How to make an offline mirror copy of a website with wget
+By Alvin Alexander. Last updated: September 20, 2019
+
+As a short note today, if you want to make an offline copy/mirror of a website using the GNU/Linux wget command, a command like this will do the trick for you:
+
+wget --mirror --convert-links --html-extension --wait=2 -e robots=off -o log -U Mozilla --user-agent=Mozilla --recursive --no-clobber --page-requisites --no-parent --adjust-extension --span-hosts \
+http://web.creativefloors.co
+     
+The options are:
+    --recursive: download the entire Web site.
+    --domains website.org: don't follow links outside website.org.
+    --no-parent: don't follow links outside the directory tutorials/html/.
+    --page-requisites: get all the elements that compose the page (images, CSS and so on).
+    --html-extension: save files with the .html extension.
+    --convert-links: convert links so that they work locally, off-line.
+    --restrict-file-names=windows: modify filenames so that they will work in Windows as well.
+    --no-clobber: don't overwrite any existing files (used in case the download is interrupted and resumed).
+To download an entire website we use the following Wget download options:
+--wait=2     "Wait the specified number of seconds between the retrievals.". In this case 2 seconds.""
+--limit-rate=20K     "Limit the download speed to amount bytes per second."
+--recursive     "Turn on recursive retrieving. The default maximum depth is 5. If the website has more levels than 5, then you can specify it with --level=depth"
+--page-requisites     "download all the files that are necessary to properly display a given HTML page. This includes such things as inlined images, sounds, and referenced stylesheets. "
+--user-agent=Mozilla     "Identify as Mozilla to the HTTP server."
+--no-parent     " Do not ever ascend to the parent directory when retrieving recursively."
+--convert-links     "After the download is complete, convert the links in the document to make them suitable for local viewing. "
+--adjust-extension     "If a file of type application/xhtml+xml or text/html is downloaded and the URL does not end with the regexp \.[Hh][Tt][Mm][Ll]?, this option will cause the suffix .html to be appended to the local filename." 
+--no-clobber     "When running Wget with -r, re-downloading a file will result in the new copy simply overwriting the old. Adding -nc will prevent this behavior, instead causing the original version to be preserved and any newer copies on the server to be ignored."
+-e robots=off     "turn off the robot exclusion"
+--level     "Specify recursion maximum depth level depth. Use inf as the value for inifinite." 
