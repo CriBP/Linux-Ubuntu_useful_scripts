@@ -1,0 +1,13 @@
+change permissions of folder and subfolders in Linux - RahulBy RahulMay 4, 20191 Min ReadUpdated:June 22, 2021 - https://tecadmin.net/change-permissions-on-folder-and-sub-folders-recursively/
+
+Setting the proper file permission for any web application is an important part of web hosting. In this tutorial, you will learn how to change file permissions on folder and sub-folders recursively in a single command.
+As you know, In Linux everything is treated as a file. A folder is also known as directory file denoted by ‘d‘ in the permission section. The below command will set the owner to www-data and group-owner to ubuntu for all files and directories and subdirectories.
+sudo chown -R www-data:ubuntu /var/www/html
+Use the chmod command to change the permissions for all files, directories, and subdirectories.
+sudo chmod -R 755 /var/www/html
+Note – The permission 755 is good to set for directories but not on files. This set the execute bit on files which is not recommended for any production environments excluded some specific cases. We recommend setting permissions separately for files and directories.
+Set permissions on files:
+sudo find /var/www/html -type f -exec chmod 644 {} \;
+Set permissions on directories:
+sudo find /var/www/html -type d -exec chmod 755 {} \;
+All done.
