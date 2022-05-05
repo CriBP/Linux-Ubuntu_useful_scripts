@@ -1,0 +1,64 @@
+- How to configure Apache Server:
+sudo apt install apache2
+apache2 -version
+sudo ufw app list
+sudo ufw allow Apache
+sudo ufw status
+sudo systemctl status apache2
+hostname -i
+sudo nano /etc/apache2/sites-available/info.net.conf
+<VirtualHost *:80>
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	#ServerName www.example.com
+
+	ServerAdmin webmaster@localhost
+	#DocumentRoot /var/www/html
+	DocumentRoot /media/5TB-WDC-EasyStore/Web
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+You'll have to edit apache2.conf and 000-default.conf to change the document root of apache.
+The Apache server is installed on /var/www/html.This is the default root directory of apache.
+Either change the root directory of Apache or move the project to /var/www/html.
+    To change Apache's root directory, run:     cd /etc/apache2/sites-available
+    Then open the 000-default.conf file using the command:     nano 000-default.conf
+    Edit the DocumentRoot option:     DocumentRoot /path/to/my/project
+    Then restart the apache server:     sudo service apache2 restart
+If you get Forbidden You don't have permission to access / on this server after changing the root of apache then do follow these steps
+    Find the apache2.conf located in /etc/apache2 and open it using:    sudo nano /etc/apache2/apache2.conf
+    Use Ctrl+W and search for Directory (It should be in line 153) It should look like this
+<Directory />
+   Options Indexes FollowSymLinks
+   AllowOverride All
+  Require all denied
+</Directory>
+    Change it to
+<Directory />
+  Options Indexes FollowSymLinks Includes ExecCGI
+  AllowOverride All
+  Require all granted
+</Directory>
+    Restart apache     sudo service apache2 restart
