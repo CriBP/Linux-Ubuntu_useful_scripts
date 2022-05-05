@@ -1,0 +1,9 @@
+Check all file systems at once, If you use a different filesystem in your PC and want to check all filesystems at once, you can use the following command:
+fsck –A
+
+Surface test HDD: 
+fsck -f -c -y
+
+fdisk -l
+umount /dev/sda5
+e2fsck -p /dev/sda5
