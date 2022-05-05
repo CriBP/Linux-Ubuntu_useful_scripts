@@ -1,0 +1,9 @@
+There are lot of way to delete a directory through CLI mode. It depend which way you are conformable.
+
+    rm -rvf /path/to/directory
+
+    -r = remove directories and their contents recursively
+    -v = explain what is being done
+    -f = ignore nonexistent files, never prompt
+
+If you are new in Linux, use man page's of commands (man rm) for more option and more accuracy.
