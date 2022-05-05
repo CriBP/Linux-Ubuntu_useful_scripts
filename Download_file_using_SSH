@@ -1,0 +1,12 @@
+Download file using SSH
+scp -P [port number] [username]@[server name or IP]:[path to file on server] [path to file on local PC]
+This will connect to example.com server with user “username” and copy the /backup/file.zip file to local system directory /local/dir. To use theis command replace the values as per your environment.
+scp username@example.com:/backup/file.zip /local/dir
+If the SSH is running on non-standard port, You can specify the port using -P option with SCP command.
+scp -P 2222 username@example.com:/backup/file.zip /local/dir
+If your remote server required the private key to connect server, You can use -i followed by private key file path to connect your server using the SCP command. This can be helpful for AWS servers.
+scp -i private_key.pem username@example.com:/backup/file.zip /local/dir
+Upload file using SSH
+You can also upload files to the remote server using SSH protocol using SCP command. Use the following example command for uploading files to SSH server.
+scp file.zip username@example.com:/remote/dir
+Similarity you can use -P switch to define port of the SSH server and -i to define private key for the user authentication.
